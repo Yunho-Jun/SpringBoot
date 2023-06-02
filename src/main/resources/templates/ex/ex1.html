@@ -6,9 +6,75 @@
 </head>
 <body>
 
-<h4>[[${list]]</h4>
+<h4>[[ ${list} ]]</h4>
 <hr/>
-<h4 th:text="${list}"></h4>
+<h2 th:text="${list}"></h2>
+
+<hr/>
+
+<ul>
+    <li th:each="str: ${list}" th:text="${str}"></li>
+</ul>
+
+<hr/>
+
+<ul>
+    <th:block th:each="str : ${list}">
+
+        <li>[[${ str }]]</li>
+    </th:block>
+</ul>
+
+<hr/>
+
+<ul>
+    <li th:each="str, status: ${list}">
+    [[${status.even}]]--[[${str}]]
+    </li>
+<!--
+    index/count/size/first/last/odd/even
+-->
+</ul>
+
+<hr/>
+<ul>
+    <li th:each="str, status: ${list}">
+        <span th:if="${status.odd}"> ODD-[[${str}]]</span>  <!--트루일경우 출력-->
+        <span th:unless="${status.odd}">EVAN -- [[${str}]]</span> <!--false 일경우 출력-->
+
+    </li>
+</ul>
+
+</hr>
+
+<li th:each="str, status:${list}">
+    <span th:text="${status.odd} ?'ODD--------' +${str} : 'EVEN----'+${str}" />
+
+</li>
+
+</hr>
+
+<ul>
+    <li th:each="str, status: ${list}">
+        <th:block th:switch="${status.index % 3}">
+            <span th:case="0">0</span>
+            <span th:case="1">1</span>
+            <span th:case="2">2</span>
+
+
+        </th:block>
+    </li>
+</ul>
+
+<a th:href="@{/hello}">Go to /hello</a>
+
+
+<a th:href="@{/hello('name=AAA',age=16)}">Go to /hello</a>
+
+<a th:href="@{/hello('name=한글처리',age=16)}">Go to /hello</a>
+
+<a th:href="@{/hello(types=${ {'AA','BB','CC'} },age=16 )}">Go to /hello</a>
+
 
 </body>
 </html>
