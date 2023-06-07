@@ -13,9 +13,9 @@ layout:decorate="~{layout/basic.html}">
       <div class="card">
         <div class="card-header">
           Board Register
-
         </div>
         <div class="card-body">
+
           <form action="/board/register" method="post">
             <div class="input-group mb-3">
               <span class="input-group-text">Title</span>
@@ -39,7 +39,6 @@ layout:decorate="~{layout/basic.html}">
 
               </div>
             </div>
-
           </form>
 
         </div> <!--end card body-->
@@ -49,6 +48,19 @@ layout:decorate="~{layout/basic.html}">
 </div>
 
 <script layout:fragment="script" th:inline="javascript">
+
+  const errors = [[${errors}]]
+  console.log(errors)
+
+  let errorMsg = ''
+
+  if(errors){
+    for(let i =0; i< errors.length; i++){
+       errorMsg += `${errors[i].field}은(는) ${errors[i].code} \n`
+    }
+    alert(errorMsg)
+  }
+
 
 </script>
 
